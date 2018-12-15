@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="utf-8">
+	<title>MDP - John "Johnny Chess" Crissman</title>
+	<!--<link rel="stylesheet" type="text/css" href="css/style.css"> -->
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.2/css/all.css" integrity="sha384-/rXc/GQVaYpyDdyxK+ecHPVYJSN9bmVFBvjA/9eOB+pb3F2w2N6fc5qB9Ew5yIns" crossorigin="anonymous">
+    <script src="square.js"></script>
+	 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
+<style>
+.grid-container {
+  display: grid;
+  grid: auto / auto auto auto auto;
+  grid-gap: 5px;
+  background-color: black;
+  padding: 1rem;
+}
+.grid-container>div {
+      border: gray 1px solid;
+  text-align: center;
+  padding:2rem 0;
+  font-size: 3rem;
+  color:#025d48;
+}
+  .square-container {
+  display: grid;
+  grid: auto / auto auto auto;
+  grid-gap: 5px;
+  background-color: black;
+  padding: 1rem;
+}
+  .positive-container {
+  display: grid;
+  grid: auto / auto auto auto;
+  grid-gap: 5px;
+  background-color: green;
+  padding: 2rem;
+}
+
+  .negative-container {
+  display: grid;
+  grid: auto / auto auto auto;
+  grid-gap: 5px;
+  background-color: red;
+  padding: 2rem;
+}
+
+  .wall-container {
+  display: grid;
+  grid: auto / auto auto auto;
+  grid-gap: 5px;
+  background-color: gray;
+  padding: 2rem;
+}
+  
+  .pol{
+  font-size:2rem;}
+</style>
+</head>
+<body class="mx-sm-2 mb-sm-2 mx-md-4 mx-lg-5" data-offset="20" data-spy="scroll" data-target="#minavega">
+
+	<!-- HEADER -->
+	
+
+		<!-- NAVEGATION BAR -->
+
+
+
+
+
+			<!-- START OF THE BODY CONTENT -->
+			<main>
+			<div class="container-fluid">
+				<div class="row align-items-center">
+				<button onclick="runthis()">start MDP </button>
+
+	
+				<p id="message"></p>
+				</div>
+			</div>
+				<h1>by John "Johnny Chess" Crissman</h1>
+
+<p>Default values:  iterations = 99, living reward = 0, noise = 0.2, gamma = 0.9</p>
+<div class="grid-container">
+  <div id="item11" class="square-container">
+    <div> </div>
+    <div class="pol"> <i class="fas fa-arrow-up"></i> </div>
+    <div class="val"> </div>
+    <div class="pol"> <i class="fas fa-arrow-left"></i> </div>
+    <div class="val"> 0.00</div>
+    <div class="pol"> <i class="fas fa-arrow-right"></i> </div>
+    <div class="val"> </div>
+    <div class="pol"> <i class="fas fa-arrow-down"></i> </div>
+  </div>
+  <div id="item12" class="square-container">
+    <div class="val"> </div>
+    <div class="pol"> <i class="fas fa-arrow-up"></i> </div>
+    <div class="val"> </div>
+    <div class="pol"> <i class="fas fa-arrow-left"></i> </div>
+    <div class="val"> 0.00</div>
+    <div class="pol"> <i class="fas fa-arrow-right"></i> </div>
+    <div class="val"> </div>
+    <div class="pol"> <i class="fas fa-arrow-down"></i> </div>
+  </div>
+  <div id="item13" class="square-container">
+    <div> </div>
+    <div class="pol"> <i class="fas fa-arrow-up"></i> </div>
+    <div> </div>
+    <div class="pol"> <i class="fas fa-arrow-left"></i> </div>
+    <div class="val"> 0.00</div>
+    <div class="pol"> <i class="fas fa-arrow-right"></i> </div>
+    <div> </div>
+    <div class="pol"> <i class="fas fa-arrow-down"></i> </div>
+  </div>  
+  <div id="item14" class="positive-container">
+    <div class="val"> +1.00</div>
+  </div>
+  <div id="item21" class="square-container">
+    <div class="val"> </div>
+    <div class="pol"> <i class="fas fa-arrow-up"></i> </div>
+    <div class="val"> </div>
+    <div class="pol"> <i class="fas fa-arrow-left"></i> </div>
+    <div class="val"> 0.00</div>
+    <div class="pol"> <i class="fas fa-arrow-right"></i> </div>
+    <div class="val"> </div>
+    <div class="pol"> <i class="fas fa-arrow-down"></i> </div>
+  </div>
+  <div id="item22" class="wall-container">
+  </div>
+  <div id="item23" class="square-container">
+    <div class="val"> </div>
+    <div class="pol"> <i class="fas fa-arrow-up"></i> </div>
+    <div class="val"> </div>
+    <div class="pol"> <i class="fas fa-arrow-left"></i> </div>
+    <div class="val"> 0.00</div>
+    <div class="pol"> <i class="fas fa-arrow-right"></i> </div>
+    <div class="val"> </div>
+    <div class="pol"> <i class="fas fa-arrow-down"></i> </div>
+  </div>
+  <div id="item24" class="negative-container">
+    <div class="val"> -1.00</div>
+  </div>
+  <div id="item31" class="square-container">
+    <div class="val"> </div>
+    <div class="pol"> <i class="fas fa-arrow-up"></i> </div>
+    <div class="val"> </div>
+    <div class="pol"> <i class="fas fa-arrow-left"></i> </div>
+    <div class="val"> 0.00</div>
+    <div class="pol"> <i class="fas fa-arrow-right"></i> </div>
+    <div class="val"> </div>
+    <div class="pol"> <i class="fas fa-arrow-down"></i> </div>
+  </div>  
+  <div id="item32" class="square-container">
+    <div class="val"> </div>
+    <div class="pol"> <i class="fas fa-arrow-up"></i> </div>
+    <div class="val"> </div>
+    <div class="pol"> <i class="fas fa-arrow-left"></i> </div>
+    <div class="val"> 0.00</div>
+    <div class="pol"> <i class="fas fa-arrow-right"></i> </div>
+    <div class="val"> </div>
+    <div class="pol"> <i class="fas fa-arrow-down"></i> </div>
+  </div>
+  <div id="item33" class="square-container">
+    <div class="val"> </div>
+    <div class="pol"> <i class="fas fa-arrow-up"></i> </div>
+    <div class="val"> </div>
+    <div class="pol"> <i class="fas fa-arrow-left"></i> </div>
+    <div class="val"> 0.00</div>
+    <div class="pol"> <i class="fas fa-arrow-right"></i> </div>
+    <div class="val"> </div>
+    <div class="pol"> <i class="fas fa-arrow-down"></i> </div>
+  </div>
+  <div id="item34" class="square-container">
+    <div class="val"> </div>
+    <div class="pol"> <i class="fas fa-arrow-up"></i> </div>
+    <div class="val"> </div>
+    <div class="pol"> <i class="fas fa-arrow-left"></i> </div>
+    <div class="val"> 0.00</div>
+    <div class="pol"> <i class="fas fa-arrow-right"></i> </div>
+    <div class="val"> </div>
+    <div class="pol"> <i class="fas fa-arrow-down"></i> </div>
+  </div>
+</div>
+
+	
+		</main>
+	
+
+	
+
+
+
+		<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+		<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+	</body>
+	</html>
